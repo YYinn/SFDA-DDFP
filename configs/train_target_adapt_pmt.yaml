@@ -1,0 +1,81 @@
+##### Experiment Specific
+doing: 'train'
+
+## example
+experiment_name: 'UNet_Abdomen_CT2MR_pmt'
+data_root: '/mnt/ExtData/Data/processed/chaos/'
+save_root: '/mnt/ExtData/SFDA_DDFP/log/revise/'
+source_model_path: '/mnt/ExtData/SFDA_DDFP/log/abdominal/UNet_Abdomen_CT2MR_bn/T2024-04-16 16:13:47_tuneall_epoch10/saved_models/model_step_0_dice_0.7580.pth' ## BN pre-adapted model
+bn_align_model: '/mnt/ExtData/SFDA_DDFP/log/abdominal/src_train/UNet_Abdomen_CT_Seg/T2023-11-30 10:12:34_/saved_models/best_model_epoch_92_dice_0.9289.pth' ## source model
+target_sites:
+- 'mr'
+dataset_name: 'abdomen'
+w1: 1
+w2: 1
+w3: 10
+lr: 0.0005
+wcls: 
+- 40 
+- 40
+- 40
+- 40
+- 40
+wglo: 0.4
+alpha: 0.8
+theta: 0.2
+
+
+## 这里一定要加单引号
+pmt_type: 'Data' #, 'Data' #'Domain' 'Spatial', None
+train_type: 'LSET1' #pmt | LSET1 | pmtinc | All | besideLSET1 | LSET1wodown3 | LSET1wodown23
+pmt_size: 256
+es_step: 10 #5
+resume_dir: ''
+continue_train: False
+total_epochs: 1
+
+random_seed: 999
+organ_list:
+- 'Liver'
+- 'R.Kidney'
+- 'L.Kidney'
+- 'Spleen'
+# ---------
+# - 'AA'
+# - 'LAC'
+# - 'LVC'
+# - 'MYO'
+# ---------
+# - 'Tumor'
+
+# Dataloader Setting
+patient_level_dataloader: False
+img_size:
+- 240
+- 240
+batch_size: 16
+num_workers: 8
+
+# Model 
+arch: 'Pmt_UNet' # Pmt_DeepLab | UNet
+use_prototype: False
+update_prototype: False
+input_dim: 3
+feat_dim: 32
+output_dim: 64
+num_classes: 2
+num_prototypes: 1
+
+# Loss parameters
+nav_t: 1
+beta: 0.001
+s_par: 0.5
+dice_ignore_index: -1
+# display
+save_steps: 500
+eval_steps: 2
+display_steps: 20
+save_visuals: True
+
+# test
+test: False

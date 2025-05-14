@@ -1,0 +1,63 @@
+##### Experiment Specific
+
+## example
+experiment_name: 'UNet_Abdomen_CT_Seg'
+data_root: '/mnt/ExtData/Data/processed/chaos/'
+save_root: '/mnt/ExtData/SFDA_DDFP/log/deeplabv3'
+source_sites:
+- 'ct'
+target_sites:
+- 'mr'
+dataset_name: 'abdomen'
+
+
+resume: ''
+continue_train: False
+total_epochs: 150
+random_seed: 999
+organ_list:
+- 'Liver'
+- 'R.Kidney'
+- 'L.Kidney'
+- 'Spleen'
+# ---------
+# - 'AA'
+# - 'LAC'
+# - 'LVC'
+# - 'MYO'
+# ---------
+# - 'Tumor'
+
+# Dataloader Setting
+img_size:
+- 256
+- 256
+batch_size: 16
+num_workers: 8
+
+# Model 
+arch: 'UNet' #'DeepLab' 
+use_prototype: False
+update_prototype: False
+input_dim: 3
+feat_dim: 32
+output_dim: 64
+num_classes: 5
+
+# Optim parameters
+# lr:  0.005
+lr: 0.0005
+
+
+# Loss parameters
+ce_ignore_index: -1
+dice_ignore_index: 0
+
+# display
+save_epochs: 10
+eval_epochs: 1
+display_steps: 100
+save_visuals: True
+
+# test
+test: False

@@ -1,0 +1,52 @@
+##### Experiment Specific
+
+## example
+experiment_name: 'UNet_Abdomen_CT2MR_bn'
+data_root: '/mnt/ExtData/Data/processed/chaos/'
+save_root: '/mnt/ExtData/SFDA_DDFP/log/'
+source_model_path: '/mnt/ExtData/SFDA_unet/log_final/chao_log/src_train/UNet_Abdomen_CT_Seg/T2023-11-30 10:12:34_/saved_models/best_model_epoch_92_dice_0.9289.pth'
+source_sites:
+- 'ct'
+target_sites:
+- 'mr'
+
+
+resume_dir: ''
+continue_train: False
+total_epochs: 1
+
+random_seed: 999
+organ_list:
+- 'Liver'
+- 'R.Kidney'
+- 'L.Kidney'
+- 'Spleen'
+
+# Dataloader Setting
+patient_level_dataloader: False
+img_size:
+- 256
+- 256
+# batch_size: 16
+batch_size: 32
+num_workers: 8
+
+# Model 
+arch: 'UNet'
+use_prototype: False
+update_prototype: False
+input_dim: 3
+feat_dim: 32
+output_dim: 64
+num_classes: 5
+num_prototypes: 1
+
+# Optim parameters
+lr: 0.0001
+
+dice_ignore_index: -1
+# display
+save_steps: 500
+eval_steps: 1
+display_steps: 100
+save_visuals: True

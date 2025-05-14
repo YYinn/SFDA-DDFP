@@ -1,0 +1,55 @@
+##### Experiment Specific
+
+## example
+experiment_name: 'UNet_Abdomen_CT_Seg_Test'
+data_root: '/mnt/ExtData/Data/processed/chaos/'
+save_root: '/log/abdominal_chaos/src_test/'
+source_model_path: '/log/abdominal_chaos/src_train/UNet_Abdomen_CT_Seg/T2023-11-30 10:12:34_/saved_models/best_model_epoch_92_dice_0.9289.pth'
+source_sites:
+- 'ct'
+target_sites:
+- 'mr'
+dataset_name: 'abdomen'
+
+resume: ''
+continue_train: False
+random_seed: 999
+organ_list:
+- 'Liver'
+- 'R.Kidney'
+- 'L.Kidney'
+- 'Spleen'
+# ---------
+# - 'AA'
+# - 'LAC'
+# - 'LVC'
+# - 'MYO'
+# ---------
+# - 'Tumor'
+
+
+# Dataloader Setting
+img_size:
+- 256
+- 256
+batch_size: 16
+num_workers: 8
+
+# Model 
+arch: 'UNet' # DeepLab
+use_prototype: False
+update_prototype: False
+input_dim: 3
+feat_dim: 32
+output_dim: 64
+num_classes: 5
+
+# Loss parameters
+ce_ignore_index: -1
+dice_ignore_index: 0
+
+# display
+save_epochs: 10
+eval_epochs: 1
+display_steps: 100
+save_visuals: True
