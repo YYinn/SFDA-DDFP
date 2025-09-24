@@ -15,17 +15,16 @@ w2: 1
 w3: 10
 lr: 0.0005
 wcls: 
-- 40 
-- 40
-- 40
-- 40
-- 40
+- 70 
+- 50
+- 50
+- 50
+- 50
 wglo: 0.4
 alpha: 0.8
 theta: 0.2
 
 
-## 这里一定要加单引号
 pmt_type: 'Data' #, 'Data' #'Domain' 'Spatial', None
 train_type: 'LSET1' #pmt | LSET1 | pmtinc | All | besideLSET1 | LSET1wodown3 | LSET1wodown23
 pmt_size: 256
