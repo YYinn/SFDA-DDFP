@@ -166,7 +166,6 @@ class pmt_Test():
                     sample_dict[sample_name] = sample_dict.get(sample_name,[]) + [(predict[i].detach().cpu(),val_segs[i].detach().cpu(),index)]
                     
             elif self.opt['dataset_name'] == 'brats':
-                # cardiac files name : ct_train_1001_iamge_0000.npy
                 for i,name in enumerate(val_names):
                     if phase == 'trgt_val':
                         start_idx = len(self.opt['target_sites'][0])
