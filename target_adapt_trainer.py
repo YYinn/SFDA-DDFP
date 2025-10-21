@@ -117,7 +117,6 @@ class pmt_Trainer():
         for name, param in self.model.named_modules():
             if hasattr(param, 'running_mean') :
 
-                # if bn_cnt <20:#>= 8 or bn_cnt < 2: # == self.tunelayer:#  
                 print(f'training on {name}')
                 bn_cnt += 1
                 continue
@@ -149,17 +148,12 @@ class pmt_Trainer():
         
     def train(self):
 
-        val_predicts = []
-        val_gts = []
         val_iterator = tqdm((self.val_dataloader), total = len(self.val_dataloader))
 
         best_dice = 0
         val_dice = []
         total_train_dice = []
         total_bn_loss = []
-        total_proto_gt = []
-        total_proto_pred = []
-
         for epoch in range(self.start_epoch,self.total_epochs):
             train_iterator = tqdm((self.train_dataloader), total = len(self.train_dataloader))
 
@@ -181,8 +175,6 @@ class pmt_Trainer():
                 trgt_predicts = []
                 trgt_gts = []
                 trgt_feat = []
-                proto_center_gt = np.zeros((5, 64))
-                proto_center_pred = np.zeros((5, 64))
                 val_iterator = tqdm((self.val_dataloader), total = len(self.val_dataloader))
 
                 if it == 10:

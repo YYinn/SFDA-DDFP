@@ -94,12 +94,6 @@ class pmt_Test():
             prob = torch.softmax(pseu, 1)
             pseu = torch.argmax(prob, 1)
 
-            # if self.opt['dataset_name'] == 'abdomen':
-            #     percent = [70, 50, 50, 50, 50]
-            # elif self.opt['dataset_name'] == 'cardiac':
-            #     percent =  [40, 40, 40, 40, 40]
-            # else:
-            #     raise ('dataset name error, which should be in [cardiac, abdomen]')
             percent =  [40, 40, 40, 40, 40]
 
             prob = prob

@@ -323,10 +323,7 @@ class pmt_Trainer():
                     if self.iter_counter.needs_evaluation_steps():
                         trgt_predicts = []
                         trgt_gts = []
-                        # for brats
-                        total_val_dice = 0
-                        total_val_dice_wobg = 0
-                        cnt = 0
+
                         val_iterator = tqdm((self.val_dataloader), total = len(self.val_dataloader))
 
                         for it, (val_imgs, val_segs, val_names) in enumerate(val_iterator):
@@ -336,22 +333,9 @@ class pmt_Trainer():
 
                             predict = self.validate_one_step([val_imgs, val_segs])
                             
-                            ## otherwise been killed
-                            # if self.opt['dataset_name'] == 'brats':
-
-                            #     dice, dice_wobg, _ = self.criterian_dc(torch.tensor(predict.detach().cpu()), torch.tensor(val_segs.detach().cpu()))
-                            #     total_val_dice += (1 - dice.item())
-                            #     total_val_dice_wobg += (1 - dice_wobg.item())
-                            #     cnt += 1
-                            # else:
                             trgt_predicts.append(predict.detach().cpu().numpy())
                             trgt_gts.append(val_segs.detach().cpu().numpy())
 
-                        # if self.opt['dataset_name'] == 'brats':
-                        #     dice = total_val_dice / cnt
-                        #     dice_wobg = total_val_dice_wobg / cnt
-                        #     logging.info(f'Trgt val new dice loss {dice}, dice wo bg {dice_wobg} (because brats dataset is too large, cls-wise dice is discard)')
-                        # else:
                         trgt_predicts = np.concatenate(trgt_predicts,axis=0) # 410, 5, 256, 256
                         trgt_gts = np.concatenate(trgt_gts,axis=0) # 410， 256， 256
 
